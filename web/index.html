@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><title>Pixel Zombie TD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body><div id="app">
+<h1>PIXEL ZOMBIE TD</h1>
+<div id="splash"><div class="z">🧟</div><b>PIXEL ZOMBIE TD</b><div class="lb"><i></i></div><small id="sm">Memuat...</small></div>
+<div id="snd"><button id="bm" onclick="tgM()">🎵</button><button id="bf" onclick="tgF()">🔊</button></div>
+<a id="apk" class="hide">⬇ DOWNLOAD APK ANDROID</a>
+
+<div id="auth" class="pn hide">
+<p>Masuk / Buat Akun</p><input id="un" maxlength="12" placeholder="Username" autocomplete="username"><p></p>
+<input id="pw" type="password" placeholder="Password (min 6)" autocomplete="current-password"><p></p>
+<div class="row"><button class="p" onclick="authGo(false)">MASUK</button><button onclick="authGo(true)">DAFTAR</button></div><p id="am"></p></div>
+
+<div id="lobby" class="hide">
+<div class="pn row"><span id="who"></span><span class="c" id="coin"></span></div>
+<div class="row" style="margin-bottom:10px"><button onclick="tab('main')">LOBBY</button><button onclick="tab('shop')">SHOP</button><button onclick="tab('load')">TOWER</button></div>
+<div class="pn" id="tb"></div></div>
+
+<div id="game" class="hide">
+<div class="pn row"><span>💰<b id="cash"></b></span><span>❤<b id="lv"></b></span><span>WAVE <b id="wv"></b>/10</span><span id="opp"></span></div>
+<canvas id="cv" width="192" height="128"></canvas>
+<p id="info" style="text-align:center;margin:6px"></p>
+<div class="pn row" id="bar"></div>
+<div class="row"><button id="sell" onclick="tgS()">JUAL</button><button id="spd" onclick="tgP()">X1</button><button id="auto" onclick="tgA()">AUTO ON</button><button id="skip" onclick="skp()">WAVE ▶</button><button class="d" onclick="end(false,'Menyerah')">MENYERAH</button></div></div>
+<div id="ov" class="hide"><div class="pn" style="text-align:center"><p id="ot"></p><button class="p" onclick="home()">KE LOBBY</button></div></div>
+</div>
+<script>setTimeout(function(){var s=document.getElementById("splash");if(s&&!s.classList.contains("hide"))document.getElementById("sm").textContent="Koneksi lambat, cek internet..."},12000)</script><script type="module" src="game.js"></script></body></html>

@@ -1,0 +1,7 @@
+{
+  "appId": "com.pixelzombie.td",
+  "appName": "Pixel Zombie TD",
+  "webDir": "www",
+  "backgroundColor": "#1b1626",
+  "server": { "url": "https://USERNAME.github.io/REPO/", "androidScheme": "https" }
+}
