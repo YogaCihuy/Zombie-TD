@@ -1,0 +1,34 @@
+name: Build APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [capacitor.config.json, package.json, .github/workflows/build-apk.yml]
+permissions:
+  contents: write
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    env:
+      WEB_URL: ${{ vars.WEB_URL || format('https://{0}.github.io/{1}/', github.repository_owner, github.event.repository.name) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - run: npm install
+      - name: Set web URL
+        run: node -e "const f='capacitor.config.json',c=require('./'+f);c.server.url=process.env.WEB_URL;require('fs').writeFileSync(f,JSON.stringify(c,null,2))"
+      - run: npx cap add android
+      - run: npx cap sync android
+      - name: Build debug APK
+        run: cd android && chmod +x gradlew && ./gradlew assembleDebug
+      - run: cp android/app/build/outputs/apk/debug/app-debug.apk PixelZombieTD.apk
+      - uses: actions/upload-artifact@v4
+        with: { name: PixelZombieTD-apk, path: PixelZombieTD.apk }
+      - name: Publish release
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh release delete apk-latest --cleanup-tag -y || true
+          gh release create apk-latest PixelZombieTD.apk --title "Pixel Zombie TD APK" --notes "APK terbaru. Game otomatis update dari web."
